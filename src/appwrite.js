@@ -45,3 +45,16 @@ export const updateSearchCount = async (searchTerm, movie) => {
     console.error(error);
   }
 };
+
+export const getTrendingMovies = async () => {
+  try {
+    const result = await tablesDB.listRows({
+      databaseId: DATABASE_ID,
+      tableId: TABLE_ID,
+      queries: [Query.limit(5), Query.orderDesc("count")],
+    });
+    return result.rows;
+  } catch (error) {
+    console.error(error);
+  }
+};
